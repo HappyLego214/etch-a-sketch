@@ -1,0 +1,92 @@
+body {
+    box-sizing: border-box;
+}
+
+div {
+    border: 1px solid black;
+}
+
+.header-container {
+    height: 100px;
+    width: auto;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: larger;
+}
+
+.body-container {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: auto;
+    gap: 50px
+
+}
+
+.sidebar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 700px;
+    width: 300px;
+    margin: 10px;
+}
+
+.grid-container {
+    flex: 0 1 auto;
+    display: flex;
+    flex-wrap: wrap;
+    height: 700px;
+    width: 700px;
+    margin: 10px;
+}
+
+.color-wheel {
+    height: 100px;
+    width: 220px;
+    margin: 10px;
+}
+
+.buttons-tools {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 25px;
+    height: 400px;
+    width: 220px;
+    margin: 10px;
+}
+
+.button-tool {
+    height: 50px;
+    width: 160px;
+}
+
+.grid-customize {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    height: 100px;
+    width: 220px;
+    margin: 10px;
+}
+
+.grid-options {
+    height: 60px;
+    width: 60px;
+}
+
+.cell {
+    width: 44px;
+    height: 44px;
+    flex: auto;
+}

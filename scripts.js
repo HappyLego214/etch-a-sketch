@@ -1,30 +1,39 @@
 const gridOptions = document.querySelectorAll('.grid-options');
 const gridContainer = document.querySelector('.grid-container');
 const cleanButton = document.querySelector("#cleanTool");
-const gridColumns = document.getElementById("g-container");
-const gridRows = document.getElementById("g-container");
- 
-window.addEventListener('load', () => {
-    firstOption();
-});
+const generateCustomGrid = document.querySelector(".generate");
 
-gridOptions.forEach((grid) => {
-    grid.addEventListener('click', () => {
-        if (grid.id == "one") {
-            firstOption();
-        } else if (grid.id == "two") {
-            secondOption();
-        } else if (grid.id == "three") {
-            thirdOption();
+const gridIndex = document.getElementById("g-container");
+const getCustomValue = document.getElementById('input-custom-grid');
+ 
+// window.addEventListener('load', () => {
+//     firstOption();
+// });
+
+gridOptions.forEach((option) => {
+    option.addEventListener('click', () => {
+        if (option.id == "one") {
+            let value = 15
+            createCustomGrid(value);
+        } else if (option.id == "two") {
+            let value = 30
+            createCustomGrid(value);
+        } else if (option.id == "three") {
+            let value = 60
+            createCustomGrid(value);
         }
     });
 });
 
-function firstOption() {
+generateCustomGrid.addEventListener('click', () => {
+    let value = getCustomValue.value;
+    createCustomGrid(value);
+}) 
+
+function createCustomGrid(grid) {
     gridContainer.replaceChildren();
-    for (i = 0; i < 225; i++) {
-        gridColumns.style.gridTemplateColumns = "repeat(15, minmax(1px, 1fr))";
-        gridRows.style.gridTemplateRows = "repeat(15, minmax(1px, 1fr));"
+    gridIndex.style.setProperty('--gridIndex', grid);
+    for (i = 0; i < (grid * grid); i++) {
         const divGrid = document.createElement('div');
         divGrid.classList.add('cell');
         divGrid.setAttribute('id', 'gridCell')
@@ -32,28 +41,4 @@ function firstOption() {
     }
 }
 
-function secondOption() {
-    gridContainer.replaceChildren();
-    for (i = 0; i < 900; i++) {;
-        gridColumns.style.gridTemplateColumns = "repeat(30, minmax(1px, 1fr))";
-        gridRows.style.gridTemplateRows = "repeat(30, minmax(1px, 1fr));"
-        const divGrid = document.createElement('div');
-        divGrid.classList.add('cell');
-        divGrid.setAttribute('id', 'gridCell')
-        gridContainer.appendChild(divGrid);
-    }
-}
-
-function thirdOption() {
-    gridContainer.replaceChildren();;
-    for (i = 0; i < 3600; i++) {
-        gridColumns.style.gridTemplateColumns = "repeat(60, minmax(1px, 1fr))";
-        gridRows.style.gridTemplateRows = "repeat(60, minmax(1px, 1fr));"
-        const divGrid = document.createElement('div');
-        divGrid.classList.add('cell');
-        divGrid.setAttribute('id', 'gridCell')
-        gridContainer.appendChild(divGrid);
-        
-    }
-}
 

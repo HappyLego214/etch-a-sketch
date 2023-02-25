@@ -1,3 +1,7 @@
+:root {
+    --gridIndex: 0;
+}
+
 body {
     box-sizing: border-box;
 }
@@ -38,6 +42,8 @@ div {
 
 .grid-container {
     display: grid;
+    grid-template-columns: repeat(var(--gridIndex), minmax(1px, 1fr));
+    grid-template-rows: repeat(var(--gridIndex), minmax(1px, 1fr));;
     height: 700px;
     width: 700px;
 }
@@ -62,6 +68,26 @@ div {
 .button-tool {
     height: 50px;
     width: 160px;
+}
+
+.grid-custom-number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    width: 220px;
+    height: 100px;
+}
+
+.input {
+    height: 20px;
+    width: 50px;
+    text-align: center;
+}
+
+.generate {
+    height: 35px;
 }
 
 .grid-customize {

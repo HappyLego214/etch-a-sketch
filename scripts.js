@@ -4,6 +4,8 @@ const generateCustomGrid = document.querySelector(".generate");
 const gridOptions = document.querySelectorAll('.grid-options');
 const cleanButton = document.querySelector("#cleanTool");
 const rgbColor = document.querySelector("#rgbTool");
+const eraser = document.querySelector("#eraserTool");
+const fillTool = document.querySelector("#fillTool");
 
 const gridIndex = document.getElementById("g-container");
 const getCustomValue = document.getElementById('input-custom-grid');
@@ -12,33 +14,64 @@ const gridCell = document.getElementById("gridCell");
 let currentTool = null;
 
 rgbColor.addEventListener('click', () => {
-    rgbTool();
+     gridPainter('rgbTool');
 });
 
-function rgbTool() { 
-    gridContainer.addEventListener("mouseover", (e, rgb) => {
-        rgb = randomColor();
-        const target = e.target.closest("#gridCell");
-            if (target) {
-                target.style.backgroundColor = rgb;
-            }
-    });
-}
+eraser.addEventListener('click', () => {
+    gridPainter('transparent');
+})
 
 cleanButton.addEventListener('click', () => {
-    const nodes = gridContainer.childNodes;
-    for (i = 0; i < nodes.length; i++) {
-        if (nodes[i].nodeName.toLowerCase() == 'div') {
-            nodes[i].style.backgroundColor = '';
-        }
-    }
+    gridFill('transparent');
 });
 
-function randomColor() {
-    let randomColor = Math.floor(Math.random()*16777215).toString(16);
-    let rgb = "#" + randomColor;
-    return rgb;
+fillTool.addEventListener('click', () => {
+    gridFill('rgbTool');
+});
+
+
+function gridPainter(entry) {
+    if (entry == "rgbTool") {
+        gridContainer.addEventListener("mouseover", (e, rgb) => {
+            rgb = randomColor();
+            const target = e.target.closest("#gridCell");
+                if (target) {
+                    target.style.backgroundColor = rgb;
+                }
+        });
+    } else {
+        gridContainer.addEventListener("mouseover", (e, rgb) => {
+            rgb = entry;
+            const target = e.target.closest("#gridCell");
+                if (target) {
+                    target.style.backgroundColor = rgb;
+                }
+        });
+    }
 }
+
+function randomColor() {
+    let randomColor = "#" + Math.floor(Math.random()*16777215).toString(16);
+    return randomColor;
+}
+
+function gridFill(e) {
+    if (e == "rgbTool") {
+        const nodes = gridContainer.childNodes;
+        for (i = 0; i < nodes.length; i++) {
+            if (nodes[i].nodeName.toLowerCase() == 'div') {
+                nodes[i].style.backgroundColor =  randomColor();
+            }
+        }
+    } else {
+        const nodes = gridContainer.childNodes;
+        for (i = 0; i < nodes.length; i++) {
+            if (nodes[i].nodeName.toLowerCase() == 'div') {
+                nodes[i].style.backgroundColor =  e;
+            }
+        }
+    }
+};
 
 function createCustomGrid(grid) {
     gridContainer.replaceChildren();

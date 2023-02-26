@@ -6,6 +6,7 @@ const cleanButton = document.querySelector("#cleanTool");
 
 const gridIndex = document.getElementById("g-container");
 const getCustomValue = document.getElementById('input-custom-grid');
+const gridCell = document.getElementById("gridCell");
 
 gridContainer.addEventListener("mouseover", (e) => {
     const target = e.target.closest("#gridCell");
@@ -13,6 +14,16 @@ gridContainer.addEventListener("mouseover", (e) => {
         target.style.backgroundColor = 'red';
     }
 })
+
+cleanButton.addEventListener('click', (e) => {
+    const nodes = gridContainer.childNodes;
+    for (i = 0; i < nodes.length; i++) {
+        if (nodes[i].nodeName.toLowerCase() == 'div') {
+            nodes[i].style.backgroundColor = '';
+        }
+    }
+
+});
 
 function createCustomGrid(grid) {
     gridContainer.replaceChildren();

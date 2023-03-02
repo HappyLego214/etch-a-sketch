@@ -12,13 +12,14 @@ const getCustomValue = document.getElementById('input-custom-grid');
 const gridCell = document.getElementById("gridCell");
 
 let currentTool = null;
+let isDrawing = false;
 
 rgbColor.addEventListener('click', () => {
-     gridPainter('rgbTool');
+    isPainting('rgbTool');
 });
 
 eraser.addEventListener('click', () => {
-    gridPainter('transparent');
+    isPainting('transparent');
 })
 
 cleanButton.addEventListener('click', () => {
@@ -30,25 +31,43 @@ fillTool.addEventListener('click', () => {
 });
 
 
+
+function isPainting(e) {
+    gridContainer.addEventListener("mousedown", () => {
+        isDrawing = true;
+        gridPainter(e);
+        console.log(isDrawing);
+    });
+
+    gridContainer.addEventListener("mouseup", () => {
+        isDrawing = false;
+        console.log(isDrawing);
+    })
+}
+
 function gridPainter(entry) {
     if (entry == "rgbTool") {
         gridContainer.addEventListener("mouseover", (e, rgb) => {
+        if (isDrawing == true) {
             rgb = randomColor();
             const target = e.target.closest("#gridCell");
                 if (target) {
                     target.style.backgroundColor = rgb;
                 }
+            }
         });
     } else {
         gridContainer.addEventListener("mouseover", (e, rgb) => {
-            rgb = entry;
-            const target = e.target.closest("#gridCell");
-                if (target) {
-                    target.style.backgroundColor = rgb;
+            if (isDrawing == true) {
+                rgb = entry;
+                const target = e.target.closest("#gridCell");
+                    if (target) {
+                        target.style.backgroundColor = rgb;
                 }
+            }
         });
     }
-}
+} 
 
 function randomColor() {
     let randomColor = "#" + Math.floor(Math.random()*16777215).toString(16);

@@ -1,4 +1,5 @@
 const gridContainer = document.querySelector('.grid-container');
+const bodyContainer = document.querySelector('.body-container');
 const generateCustomGrid = document.querySelector(".generate");
 
 const gridOptions = document.querySelectorAll('.grid-options');
@@ -11,16 +12,17 @@ const gridIndex = document.getElementById("g-container");
 const getCustomValue = document.getElementById('input-custom-grid');
 const gridCell = document.getElementById("gridCell");
 
-let currentTool = null;
 let isDrawing = false;
 
 rgbColor.addEventListener('click', () => {
-    isPainting('rgbTool');
+    gridPainter("rgbTool");
+    isPainting("rgbTool");
 });
 
 eraser.addEventListener('click', () => {
-    isPainting('transparent');
-})
+    gridPainter("transparent");
+    isPainting("transparent");
+});
 
 cleanButton.addEventListener('click', () => {
     gridFill('transparent');
@@ -30,19 +32,34 @@ fillTool.addEventListener('click', () => {
     gridFill('rgbTool');
 });
 
-
-
-function isPainting(e) {
-    gridContainer.addEventListener("mousedown", () => {
+function isPainting(entry) {
+    gridContainer.addEventListener("mousedown", (e, rgb) => {
         isDrawing = true;
-        gridPainter(e);
-        console.log(isDrawing);
+
+        if (entry == "rgbTool") {
+            rgb = randomColor();
+            const target = e.target.closest("#gridCell");
+                if (target) {
+                    target.style.backgroundColor = rgb;
+                }
+        } else {
+            rgb = entry;
+            const target = e.target.closest("#gridCell");
+                if (target) {
+                    target.style.backgroundColor = rgb;
+                }
+             }       
     });
 
     gridContainer.addEventListener("mouseup", () => {
-        isDrawing = false;
+        isDrawing = false
         console.log(isDrawing);
-    })
+    });
+
+    gridContainer.addEventListener("mouseleave", () => {
+        isDrawing = false
+        console.log(isDrawing);
+    });
 }
 
 function gridPainter(entry) {
@@ -67,6 +84,8 @@ function gridPainter(entry) {
             }
         });
     }
+
+    return;
 } 
 
 function randomColor() {
@@ -120,11 +139,15 @@ gridOptions.forEach((option) => {
             createCustomGrid(value);
         }
     });
+
+    return;
+
 });
 
 generateCustomGrid.addEventListener('click', () => {
     let value = getCustomValue.value;
     createCustomGrid(value);
+    return;
 }) 
 
 

@@ -35,7 +35,7 @@ div {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    height: 700px;
+    height: 800px;
     width: 300px;
     margin: 10px;
 }
@@ -44,8 +44,8 @@ div {
     display: grid;
     grid-template-columns: repeat(var(--gridIndex), minmax(1px, 1fr));
     grid-template-rows: repeat(var(--gridIndex), minmax(1px, 1fr));;
-    height: 700px;
-    width: 700px;
+    height: 800px;
+    width: 800px;
 }
 
 .color-wheel {

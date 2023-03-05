@@ -84,8 +84,6 @@ function gridPainter(entry) {
             }
         });
     }
-
-    return;
 } 
 
 function randomColor() {
